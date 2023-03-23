@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - prints number ecept multiples of 3 and 5
+ * main - prints numbers except multiples of 3 and 5
  * Return: 0 always
  */
 
