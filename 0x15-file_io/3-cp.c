@@ -16,21 +16,21 @@ void close_file(int fd);
 
 char *create_buffer(char *file)
 {
-	char *buf;
+	char *buffer;
 
-	buf = malloc(sizeof(char) * 1024);
-	if (buf == NULL)
+	buffer = malloc(sizeof(char) * 1024);
+	if (buffer == NULL)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", file);
 		exit(99);
 	}
-	return (buf);
+	return (buffer);
 }
 
 /**
  * close_file - closes a file descriptor
- * @fd: a ile escriptor
+ * @fd: a file descriptor
  * Return: nothing
  */
 
@@ -55,11 +55,11 @@ void close_file(int fd)
 
 int main(int argc, char *argv[])
 {
-	int f_from;
-	int f_to;
+	int from;
+	int to;
 	int r;
 	int w;
-	char *buf;
+	char *buffer;
 
 	if (argc != 3)
 	{
@@ -67,23 +67,24 @@ int main(int argc, char *argv[])
 				"Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buf = create_buffer(argv[2]);
-	f_from = open(argv[1], O_RDONLY);
-	r = read(f_from, buf, 1024);
-	f_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	r = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-	if (f_from == -1)
+		{
+	if (from == -1)
 	dprintf(STDERR_FILENO,
 			"Error: Can't read from file %s\n", argv[1]);
-	exit(98);
 	if (r == -1)
 	dprintf(STDERR_FILENO,
 			"Error: Can't read from file %s\n", argv[1]);
 	exit(98);
-	} while
-	(w = write(f_to, buf, r));
-	if (f_to == -1)
+	}
+
+	w = write(to, buffer, r);
+	if (to == -1)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", argv[2]);
@@ -91,12 +92,14 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", argv[2]);
 	exit(99);
-
-	r = read(f_from, buf, 1024);
-	f_to = open(argv[2], O_WRONLY | O_APPEND);
 	}
-	if (r > 0)
-	close_file(f_from);
-	close_file(f_to);
+
+	r = read(from, buffer, 1024);
+	to = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (r > 0);
+	close_file(from);
+	close_file(to);
+
 	return (0);
 }
