@@ -23,6 +23,8 @@ char *str_concat(char *s1, char *s2)
 		s1 = " ";
 	if (s2 == NULL)
 		s2 = " ";
+	if (size == NULL)
+		return (NULL);
 	for (i = 0; i < s1_length; i++)
 		t[i] = s1[i];
 	for (i = 0; i < s2_length; i++)
