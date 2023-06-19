@@ -2,7 +2,6 @@
 
 #define DOG_H
 
-int main(void);
 
 /**
  * dog - structure of a dog
