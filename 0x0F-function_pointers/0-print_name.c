@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 /**
- * prnt_name - function that prints a name
+ * print_name - function that prints a name
  * @name: pointer to a char
  * @f: function pointer
  * Return: nothing
