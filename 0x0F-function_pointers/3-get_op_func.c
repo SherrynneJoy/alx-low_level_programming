@@ -1,5 +1,6 @@
-#include "calc.h"
+#include "3-calc.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * get_op_func - function pointer
@@ -17,15 +18,8 @@ int (*get_op_func(char *s))(int, int)
 	{"%", op_mod},
 	{NULL, NULL}
 	};
-	int i;
-
-	if (s == NULL)
-		return (NULL);
-	printf("Enter your choice: 0 for op_ad, 1 for op_sub,
-			2 for op_mul, 3 for op_div, 4 for op_mod:\n");
-	scanf("%d", &ops);
-	printf("Enter the two numbers:\n");
-	scanf("%d %d", &a, &b);
-	printf("%d", get_op_func[ops](i));
-	return (0);
+	int i = 0;
+	while (ops[i].op != NULL && *(ops[i].op) != *s)
+		i++;
+	return (ops[i].f);
 }
