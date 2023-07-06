@@ -10,8 +10,8 @@ void print_binary(unsigned long int n)
 	int i, j = 0;
 	unsigned long int mask;
 
-	/* assuming a 32-bit int */
-	for (i = 31; i >= 0; i--)
+	/* assuming a 64-bit int */
+	for (i = 63; i >= 0; i--)
 	{
 		mask = n >> i;
 
