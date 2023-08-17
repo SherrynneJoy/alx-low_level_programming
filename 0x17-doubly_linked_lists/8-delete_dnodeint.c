@@ -3,24 +3,6 @@
 #include <stdio.h>
 
 /**
- * deleteNode - deletes a node
- * @head: pointer to a pointer
- * @del: pointer to node to be deleted
- * Return: 0 when successful
- */
-void deleteNode(dlistint_t **head, dlistint_t *del)
-{
-	if ((*head) == NULL || del == NULL)
-		return;
-	if ((*head) == del)
-		(*head) = del->next;
-	if (del->next != NULL)
-		del->next->prev = del->prev;
-	if (del->prev != NULL)
-		del->prev->next = del->next;
-	free(del);
-}
-/**
  * delete_dnodeint_at_index - deletes the node at index index
  * @head: pointer to a pointer
  * @index: position of node to be deleted
@@ -29,15 +11,34 @@ void deleteNode(dlistint_t **head, dlistint_t *del)
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 	dlistint_t *temp = (*head);
-	unsigned int i = 1;
+	dlistint_t *h;
+	unsigned int i = 0;
 
-	if ((*head) == NULL || index <= 0)
-		return (-1);
-	for (i = 1; temp != NULL && i < index; i++)
+	if (temp != NULL)
+		while (temp->prev != NULL)
+			temp = temp->prev;
+	while (temp != NULL)
+	{
+		if (i == index)
+		{
+			if (i == 0)
+			{
+				(*head) = temp->next;
+				if ((*head) != NULL)
+					(*head)->prev = NULL;
+			}
+			else
+			{
+				h->next = temp->next;
+				if (temp->next != NULL)
+					temp->next->prev = h;
+			}
+			free(temp);
+			return (1);
+		}
+		h = temp;
 		temp = temp->next;
-	if (temp == NULL)
-		return (-1);
-	deleteNode(head, temp);
-
-	return (1);
+		i++;
+	}
+	return (-1);
 }
