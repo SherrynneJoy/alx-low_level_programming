@@ -11,13 +11,12 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index = 0;
+	unsigned long int index;
 	hash_node_t *current, *temp;
 
-	if (ht == NULL || key == NULL || strlen(key) == 0)
+	if (ht == NULL || key == NULL)
 		return (0);
 	index = hash_djb2((const unsigned char *)key) % ht->size;
-	/*check if the key exists in the hash table*/
 	temp = ht->array[index];
 	while (temp)
 	{
@@ -35,7 +34,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	current = malloc(sizeof(hash_node_t));
 	if (current == NULL)
 		return (0);
-	current->key = strdup(value);
+	current->key = strdup(key);
 	if (current->key == NULL)
 	{
 		free(current);
