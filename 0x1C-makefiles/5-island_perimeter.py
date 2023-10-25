@@ -3,23 +3,18 @@
 
 
 def island_perimeter(grid):
-    if not grid:
-        return 0
-
     myperim = 0
-    rows = len(grid)
-    columns = len(grid[0])
+    edges = 0
+    myheight = len(grid)
+    mywidth = len(grid[0])
 
-    for row in range(rows):
-        for column in range(columns):
-            if grid[row][column] == 1:
-                if row == 0 or grid[row - 1][column] == 0:
-                    myperim = myperim + 1
-                if row == rows - 1 or grid[row + 1][column] == 0:
-                    myperim += 1
-                if column == 0 or grid[row][column - 1] == 0:
-                    myperim += 1
-                if column == columns - 1 or grid[row][column + 1] == 0:
-                    myperim += 1
+    for i in range(myheight):
+        for m in range(mywidth):
+            if grid[i][m] == 1:
+                myperim += 1
+                if (m > 0 and grid[i][m - 1] == 1):
+                    edges =+ 1
+                if (i > 0 and grid[i - 1][m] == 1):
+                    edges += 1
 
-    return (myperim)
+    return myperim * 4 - edges * 2
