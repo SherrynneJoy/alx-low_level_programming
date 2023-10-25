@@ -3,18 +3,19 @@
 
 
 def island_perimeter(grid):
-    myperim = 0
+    """a function to get the perimeter of an island"""
+    height = len(grid)
+    width = len(grid[0])
     edges = 0
-    myheight = len(grid)
-    mywidth = len(grid[0])
+    size = 0
 
-    for i in range(myheight):
-        for m in range(mywidth):
-            if grid[i][m] == 1:
-                myperim += 1
-                if (m > 0 and grid[i][m - 1] == 1):
-                    edges =+ 1
-                if (i > 0 and grid[i - 1][m] == 1):
+    for i in range(height):
+        for j in range(width):
+            if grid[i][j] == 1:
+                size += 1
+                if (j > 0 and grid[i][j - 1] == 1):
+                    edges += 1
+                if (i > 0 and grid[i - 1][j] == 1):
                     edges += 1
 
-    return myperim * 4 - edges * 2
+    return size * 4 - edges * 2
